@@ -1,10 +1,31 @@
 <%- include("partials/header")%>
-<h1>Campgrounds</h1>
-<a href="/campgrounds/new">Add your own campground</a>
-<%camps.forEach(function(camp){%>
-    <div>
-        <p><%=camp.name%></p>
-        <img src=<%=camp.image%> alt="Camp">
+<div class="container bg-light">
+    <div class="pt-4 pl-4">
+        <h1 class="py-1">
+            Welcome to 
+            <small class="text-muted">YelpCamp!</small>
+        </h1>
+        <p>Explore these Campgrounds, hand picked just for you!</p>
+        <p class="pb-2">
+        <a class="btn btn-dark btn-lg" href="/campgrounds/new">Add your own campground</a>
+        </p>
+    </div>    
+</div>
+
+
+   <div class="container">
+        <div class="row">
+            <%camps.forEach(function(camp){%>
+            <div class="col-6 col-md-3">
+                <div class="card" style="height:100%">
+                    <img class="card-img-top img-thumbnail" src=<%=camp.image%> alt="Camp">
+                    <div class="card-body">
+                        <h5 class="card-title"><%=camp.name%></h5>
+                    </div>
+                </div>
+            </div><%});%>
+        </div>
     </div>
-<%});%>
 <%- include("partials/footer")%>
+
+
