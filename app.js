@@ -14,7 +14,8 @@ app.set('view engine', 'ejs');
 //MongoDB schema
 const campgroundsSchema = new mongoose.Schema({
     name: String,
-    image:String
+    image:String,
+    description:String
 });
 
 //MongoDB model
@@ -25,7 +26,8 @@ const Campground= mongoose.model('Campground', campgroundsSchema);
 Campground.create(
     {
         name:"Spiti Valley, Himachal Pradesh",
-        image:"https://toib.b-cdn.net/wp-content/uploads/2017/08/spiti-valley-himachal-pradesh.jpg"
+        image:"https://toib.b-cdn.net/wp-content/uploads/2017/08/spiti-valley-himachal-pradesh.jpg",
+        description:"Great place for family holidays."
     },
     function(err, campgrounds){
         if(err){
@@ -35,7 +37,7 @@ Campground.create(
         }
     }
 );
-
+/*
 
 const camps=[
     {
@@ -57,27 +59,29 @@ const camps=[
     }
 ];
 */
-
+//HOME
 app.get("/", function(req,res){
-    res.render("landing.ejs");
+    res.render("landing");
 });
 
+//INDEX
 app.get("/campgrounds", function(req,res){
     Campground.find({},function(err, campgrounds){
             if(err){
                 console.log(err);
             }else{
-                res.render("campgrounds.ejs",{camps:campgrounds});
+                res.render("campgrounds",{camps:campgrounds});
             }
         }
     );    
 });
 
+//NEW CAMPGROUND
 app.post("/campgrounds", function(req,res){
     const name=req.body.campname;
     const url=req.body.campurl;
-    const newCamp={name:name,image:url};
-    console.log(newCamp);
+    const desc=req.body.camdesc;
+    const newCamp={name:name,image:url, description:desc};
     Campground.create(newCamp,function(err, campgrounds){
             if(err){
                 console.log(err);
@@ -88,9 +92,23 @@ app.post("/campgrounds", function(req,res){
     );
 });
 
+//FORM TO ADD NEW CAMPGROUND
 app.get("/campgrounds/new", function(req,res){
-    res.render("addcampground.ejs");
+    res.render("addcampground");
 });
 
+//SHOW CAMPGROUND DESCRIPTION
+app.get("/campgrounds/:id", function(req,res){
+    
+    Campground.findById(req.params.id, function(err, campgrounds){
+            if(err){
+            console.log(err);
+            }else{
+            res.render("showcampground",{camps:campgrounds});
+            }
+        }
+    ); 
+});
 
+//CONNECTION
 app.listen(3000);
