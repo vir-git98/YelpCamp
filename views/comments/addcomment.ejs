@@ -1,0 +1,15 @@
+<%- include("../partials/header")%>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-10 col-md-6 pb-4 my-4 mx-auto border border-dark rounded-0">
+            <h1>Add a comment on <%=camps.name%></h1>
+            <form action="/campgrounds/<%=camps._id%>/comments" method="POST">
+                <input class="form-control mb-3" type="text" name="comment[text]" placeholder="Text">
+                <input class="form-control mb-3" type="text" name="comment[author]" placeholder="Author">
+                <button class="btn btn-outline-dark btn-block">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include("../partials/footer")%>

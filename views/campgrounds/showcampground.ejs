@@ -1,4 +1,4 @@
-<%- include("partials/header")%>
+<%- include("../partials/header")%>
 <p><%=camps.name%></p>
 <img src="<%=camps.image%>" alt="">
 <p><%=camps.description%></p>
@@ -6,4 +6,5 @@
     <p><%=comment.text%></p>
     <p><%=comment.author%></p>
 <%});%>
-<%- include("partials/footer")%>
+<a href="/campgrounds/<%=camps._id%>/comments/new">Add a comment</a>
+<%- include("../partials/footer")%>

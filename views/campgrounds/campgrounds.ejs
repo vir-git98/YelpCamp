@@ -1,4 +1,4 @@
-<%- include("partials/header")%>
+<%- include("../partials/header")%>
 <div class="container bg-light mt-3 border border-dark rounded-0">
     <div class="pt-4 pl-4">
         <h1 class="py-1">
@@ -18,7 +18,7 @@
             <%camps.forEach(function(camp){%>
             <div class="col-6 col-md-3">
                 <div class="card border border-dark rounded-0" style="height:100%">
-                    <img class="card-img-top img-thumbnail" src="<%=camp.image%>" alt="Camp" style="height: 50%;">
+                    <img class="card-img-top img-thumbnail" src="<%=camp.image%>" alt="Camp" style="height: 65%;">
                     <div class="card-body">
                         <h5 class="card-title"><%=camp.name%></h5>
                         <p>
@@ -29,6 +29,6 @@
             </div><%});%>
         </div>
     </div>
-<%- include("partials/footer")%>
+<%- include("../partials/footer")%>
 
 
