@@ -33,6 +33,12 @@ passport.use(new passportLocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//HOLD INFO OF LOGGED IN USER AND RUN IT AS A MIDDLEWARE FOR ALL PAGES
+app.use(function (req,res,next) {
+   res.locals.currentUser=req.user;
+   console.log(req.user);
+   next(); 
+});
 
 //MongoDB DB
 /*
@@ -89,8 +95,10 @@ app.get("/campgrounds", function (req, res) {
     );
 });
 
-//NEW CAMPGROUND
-app.post("/campgrounds", function (req, res) {
+//ADD NEW CAMPGROUND ROUTES
+
+    //1. NEW CAMPGROUND POST HANDLE ROUTE
+app.post("/campgrounds", isLoggedIn ,function (req, res) {
     const name = req.body.campname;
     const url = req.body.campurl;
     const desc = req.body.camdesc;
@@ -105,8 +113,8 @@ app.post("/campgrounds", function (req, res) {
     );
 });
 
-//FORM TO ADD NEW CAMPGROUND
-app.get("/campgrounds/new", function (req, res) {
+    //2. FORM TO ADD NEW CAMPGROUND ROUTE
+app.get("/campgrounds/new", isLoggedIn ,function (req, res) {
     res.render("campgrounds/addcampground");
 });
 
@@ -121,8 +129,10 @@ app.get("/campgrounds/:id", function (req, res) {
     });
 });
 
-//ADD NEW COMMENT ROUTE
-app.get("/campgrounds/:id/comments/new", function(req,res){
+//ROUTES FOR ADDING A COMMENT
+
+    //1. FORM TO ADD NEW COMMENT ROUTE
+app.get("/campgrounds/:id/comments/new", isLoggedIn ,function(req,res){
     Campground.findById(req.params.id, function(err,foundCampground){
         if(err){
             console.log(err);
@@ -132,8 +142,8 @@ app.get("/campgrounds/:id/comments/new", function(req,res){
     });
 });
 
-//CREATE NEW COMMENT ROUTE
-app.post("/campgrounds/:id/comments", function(req,res){
+    //2. CREATE NEW COMMENT POST ROUTE
+app.post("/campgrounds/:id/comments", isLoggedIn ,function(req,res){
     Campground.findById(req.params.id, function(err,foundCampground){
         if (err) {
             console.log(err);
@@ -184,6 +194,20 @@ app.post("/login",passport.authenticate("local",
     }),
     function (req,res) {}
 );
+
+//LOGOUT ROUTE
+app.get("/logout", function (req,res) {
+   req.logout(); 
+   res.redirect("/");
+});
+
+//MIDDLEWARE TO CHECK IF THE USER IS LOGGED IN OR NOT
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()){
+        return next();
+    }    
+    res.redirect("/login");
+}
 
 //CONNECTION
 app.listen(3000);
