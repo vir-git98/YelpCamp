@@ -1,10 +1,47 @@
 <%- include("../partials/header")%>
-<p><%=camps.name%></p>
-<img src="<%=camps.image%>" alt="">
-<p><%=camps.description%></p>
-<%camps.comments.forEach(function(comment){%>
-    <p><%=comment.text%></p>
-    <p><%=comment.author%></p>
-<%});%>
-<a href="/campgrounds/<%=camps._id%>/comments/new">Add a comment</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 mt-3">
+            <h3>YelpCamp</h3>
+            <ul class="list-group">
+                <li class="list-group-item active" aria-current="true" style="background-color:black;">Category 1</li>
+                <li class="list-group-item">Category 2</li>
+                <li class="list-group-item">Category 3</li>
+                <li class="list-group-item">Category 4</li>
+            </ul>
+        </div>
+        <div class="col-md-9 mt-3">
+            <div class="card mb-3">
+                <img src="<%=camps.image%>" class="card-img-top" alt="campground_image">
+                <div class="card-body">
+                  <h5 class="card-title"><a href=""><%=camps.name%></a></h5>
+                  <p class="card-text"><%=camps.description%></p>
+                  <p class="card-text"><small><strong>$880 per night</strong></small></p>
+                </div>
+            </div>
+            <div class="border border-dark rounded-0">
+                <div class="row">
+                    <div class="col-md-12">    
+                        <a class="btn btn-outline-dark float-right m-2 rounded-0" href="/campgrounds/<%=camps._id%>/comments/new">Add a comment</a>
+                    </div>
+                </div>
+                <hr class="m-0">
+                <%camps.comments.forEach(function(comment){%>
+                <div class="card m-3">
+                    <div class="card-header">
+                      5 STARS
+                    </div>
+                    <div class="card-body">
+                      <blockquote class="blockquote mb-0">
+                        <p><%=comment.text%></p>
+                        <footer class="blockquote-footer"><strong><%=comment.author%></strong> <cite title="Source Title">YelpCamp verified user</cite></footer>
+                      </blockquote>
+                    </div>
+                </div>
+                <%});%>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%- include("../partials/footer")%>
