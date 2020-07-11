@@ -170,5 +170,20 @@ app.post("/register", function(req, res) {
     });  
 })
 
+//LOGIN ROUTES
+    //1.LOGIN FORM ROUTE
+app.get("/login", function (req,res) {
+   res.render("login"); 
+});
+
+    //2.LOGIN HANDLE ROUTE
+app.post("/login",passport.authenticate("local",
+    {
+    successRedirect: "/campgrounds",
+    failureRedirect: "/login"
+    }),
+    function (req,res) {}
+);
+
 //CONNECTION
 app.listen(3000);
