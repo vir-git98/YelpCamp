@@ -21,12 +21,17 @@ router.get("/", function (req, res) {
 router.post("/", isLoggedIn ,function (req, res) {
     const name = req.body.campname;
     const url = req.body.campurl;
-    const desc = req.body.camdesc;
-    const newCamp = { name: name, image: url, description: desc };
+    const desc = req.body.campdesc;
+    const grabauthor={
+        id:req.user._id,
+        username:req.user.username
+    };
+    const newCamp = { name: name, image: url, description: desc, author:grabauthor };
     Campground.create(newCamp, function (err, campgrounds) {
         if (err) {
             console.log(err);
         } else {
+            console.log(newCamp);
             res.redirect("/campgrounds");
         }
     }

@@ -16,6 +16,7 @@
                 <div class="card-body">
                   <h5 class="card-title"><a href=""><%=camps.name%></a></h5>
                   <p class="card-text"><%=camps.description%></p>
+                  <p class="card-text"><em>Campground submitted by - <%=camps.author.username%></em></p>
                   <p class="card-text"><small><strong>$880 per night</strong></small></p>
                 </div>
             </div>
@@ -34,7 +35,7 @@
                     <div class="card-body">
                       <blockquote class="blockquote mb-0">
                         <p><%=comment.text%></p>
-                        <footer class="blockquote-footer"><strong><%=comment.author%></strong> <cite title="Source Title">YelpCamp verified user</cite></footer>
+                        <footer class="blockquote-footer"><strong><%=comment.author.username%></strong> <cite title="Source Title">YelpCamp verified user</cite></footer>
                       </blockquote>
                     </div>
                 </div>

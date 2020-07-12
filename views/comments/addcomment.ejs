@@ -6,7 +6,6 @@
             <h1>Add a comment on <%=camps.name%></h1>
             <form action="/campgrounds/<%=camps._id%>/comments" method="POST">
                 <input class="form-control mb-3" type="text" name="comment[text]" placeholder="Text">
-                <input class="form-control mb-3" type="text" name="comment[author]" placeholder="Author">
                 <button class="btn btn-outline-dark btn-block rounded-0">Submit</button>
             </form>
         </div>

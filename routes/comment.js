@@ -24,6 +24,9 @@ const express   =  require("express"),
                     if (err) {
                         console.log(err);
                     } else {
+                        foundComment.author.id=req.user._id;
+                        foundComment.author.username=req.user.username;
+                        foundComment.save();
                         foundCampground.comments.push(foundComment);
                         foundCampground.save();
                         res.redirect('/campgrounds/'+foundCampground._id);

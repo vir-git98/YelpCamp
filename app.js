@@ -50,5 +50,5 @@ app.use(indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-//CONNECTION
+//APP CONNECTION TO THE SERVER
 app.listen(3000);
