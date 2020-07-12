@@ -11,6 +11,7 @@ const express       = require("express"),
       expressSession= require("express-session"),
       passport      = require("passport"),
       passportLocal = require("passport-local"),
+      methodOverride= require("method-override"),
       passportLocalMongoose = require("passport-local-mongoose");
 
 //REQUIRED ROUTES
@@ -20,11 +21,15 @@ const indexRoutes       =   require("./routes/index"),
 
       seedDB();
 //MongoDB/Mongoose CONFIGURATION
-mongoose.connect('mongodb://localhost/yelpcamp', { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/yelpcamp', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify:false });
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //EJS CONFIGURATION
 app.set('view engine', 'ejs');
+
+
+//method-override CONFIGURATION
+app.use(methodOverride("_method"));
 
 //PASSPORT CONFIGURATION
 app.use(expressSession({
