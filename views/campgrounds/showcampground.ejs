@@ -18,10 +18,12 @@
                   <p class="card-text"><%=camps.description%></p>
                   <p class="card-text"><em>Campground submitted by - <%=camps.author.username%></em></p>
                   <p class="card-text"><small><strong>$880 per night</strong></small></p>
-                  <a class="btn btn-outline-dark rounded-0" href="/campgrounds/<%=camps._id%>/edit">Edit</a>
-                  <form class="d-inline" action="/campgrounds/<%=camps.id%>?_method=DELETE" method="POST">
+                  <% if(currentUser && camps.author.id.equals(currentUser._id)){ %>
+                    <a class="btn btn-outline-dark rounded-0" href="/campgrounds/<%=camps._id%>/edit">Edit</a>
+                    <form class="d-inline" action="/campgrounds/<%=camps.id%>?_method=DELETE" method="POST">
                         <button class="btn btn-outline-dark rounded-0">Delete</button>
-                  </form>
+                    </form>
+                  <% } %>
                 </div>
             </div>
             <div class="border border-dark rounded-0">

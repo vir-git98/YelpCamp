@@ -56,7 +56,7 @@ router.get("/:id", function (req, res) {
 
 //EDIT AND UPDATE CAMPGROUND ROUTES
     //1.EDIT FORM ROUTE
-router.get("/:id/edit", function(req,res){
+router.get("/:id/edit", checkCampgroundOwnership ,function(req,res){
     Campground.findById(req.params.id, function(err, foundCampground){
         if (err) {
             console.log(err);
@@ -67,7 +67,7 @@ router.get("/:id/edit", function(req,res){
 });
 
     //HANDLE EDIT AND UPDATE DATA PUT ROUTE
-router.put("/:id", function(req,res){
+router.put("/:id", checkCampgroundOwnership ,function(req,res){
     const name=req.body.campname,
           img =req.body.campurl,
           desc=req.body.campdesc,
@@ -86,7 +86,7 @@ router.put("/:id", function(req,res){
 });
 
 //DELETE/DESTROY CAMPGROUND ROUTE
-router.delete("/:id", function(req,res){
+router.delete("/:id", checkCampgroundOwnership ,function(req,res){
     Campground.findByIdAndDelete(req.params.id,function(err){
         if (err) {
             console.log(err);
@@ -102,6 +102,27 @@ function isLoggedIn(req, res, next) {
         return next();
     }    
     res.redirect("/login");
+}
+
+//MIDDLEWARE TO CHECK IF A USER IS AUTHORTIZED TO EDIT OR DELETE CAMPGROUNDS
+function checkCampgroundOwnership(req,res,next){
+    if(req.isAuthenticated()){
+        Campground.findById(req.params.id, function(err,foundCampground){
+            if (err) {
+                console.log(err);
+                res.redirect("back");
+            } else {
+                if (foundCampground.author.id.equals(req.user._id)) {
+                    next();
+                }else{
+                    res.redirect("back");
+                    console.log("Need authorization.")
+                }
+            }
+        });
+    }else{
+        res.redirect("back");
+    }
 }
 
 module.exports=router;
