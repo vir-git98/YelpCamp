@@ -42,6 +42,12 @@
                       <blockquote class="blockquote mb-0">
                         <p><%=comment.text%></p>
                         <footer class="blockquote-footer"><strong><%=comment.author.username%></strong> <cite title="Source Title">YelpCamp verified user</cite></footer>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){%>
+                        <a class="btn btn-outline-dark rounded-0 btn-sm" href="/campgrounds/<%=camps._id%>/comments/<%=comment._id%>/edit">Edit</a>
+                        <form class="d-inline" action="/campgrounds/<%=camps.id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-outline-dark rounded-0 btn-sm">Delete</button>
+                        </form>
+                        <% } %>
                       </blockquote>
                     </div>
                 </div>
