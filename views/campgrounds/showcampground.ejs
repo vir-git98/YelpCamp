@@ -19,9 +19,9 @@
                   <p class="card-text"><em>Campground submitted by - <%=camps.author.username%></em></p>
                   <p class="card-text"><small><strong>$880 per night</strong></small></p>
                   <% if(currentUser && camps.author.id.equals(currentUser._id)){ %>
-                    <a class="btn btn-outline-dark rounded-0" href="/campgrounds/<%=camps._id%>/edit">Edit</a>
+                    <a class="btn btn-outline-warning rounded-0" href="/campgrounds/<%=camps._id%>/edit">Edit</a>
                     <form class="d-inline" action="/campgrounds/<%=camps.id%>?_method=DELETE" method="POST">
-                        <button class="btn btn-outline-dark rounded-0">Delete</button>
+                        <button class="btn btn-outline-danger rounded-0">Delete</button>
                     </form>
                   <% } %>
                 </div>
@@ -43,9 +43,9 @@
                         <p><%=comment.text%></p>
                         <footer class="blockquote-footer"><strong><%=comment.author.username%></strong> <cite title="Source Title">YelpCamp verified user</cite></footer>
                         <% if(currentUser && comment.author.id.equals(currentUser._id)){%>
-                        <a class="btn btn-outline-dark rounded-0 btn-sm" href="/campgrounds/<%=camps._id%>/comments/<%=comment._id%>/edit">Edit</a>
+                        <a class="btn btn-outline-warning rounded-0 btn-sm" href="/campgrounds/<%=camps._id%>/comments/<%=comment._id%>/edit">Edit</a>
                         <form class="d-inline" action="/campgrounds/<%=camps.id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                            <button class="btn btn-outline-dark rounded-0 btn-sm">Delete</button>
+                            <button class="btn btn-outline-danger rounded-0 btn-sm">Delete</button>
                         </form>
                         <% } %>
                       </blockquote>

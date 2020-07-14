@@ -40,3 +40,17 @@
       </div>
     </div>
   </nav>
+
+  <div class="container mt-2">
+    <% if(errmsg && errmsg.length>0){%>
+      <div class="alert alert-danger rounded-0" role="alert">
+        <%= errmsg %>
+      </div>
+    <% } else { %>
+       <% if(scsmsg && scsmsg.length>0){ %>
+        <div class="alert alert-success" role="alert">
+          <%= scsmsg %>
+        </div> 
+       <% } %> 
+    <% } %>
+  </div>

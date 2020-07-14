@@ -10,19 +10,20 @@ middlewareObj.checkCampgroundOwnership = function (req,res,next){
     if(req.isAuthenticated()){
         Campground.findById(req.params.id, function(err,foundCampground){
             if (err) {
-                console.log(err);
-                res.redirect("back");
+                req.flash("error", "Something went wrong!");
+                res.redirect("/campgrounds");
             } else {
                 if (foundCampground.author.id.equals(req.user._id)) {
                     next();
                 }else{
-                    res.redirect("back");
-                    console.log("Need authorization.")
+                    req.flash("error", "You are not authorized!")
+                    res.redirect("/campgrounds");
                 }
             }
         });
     }else{
-        res.redirect("back");
+        req.flash("error","You need to login first!")
+        res.redirect("/campgrounds");
     }
 }
 
@@ -31,17 +32,20 @@ middlewareObj.checkCommentOwnership = function (req,res,next) {
     if (req.isAuthenticated()) {
         Comment.findById(req.params.comment_id, function(err,foundComment){
             if (err) {
-                console.log(err);
+                req.flash("error", "Something went wrong!");
+                res.redirect("/campgrounds");
             } else {
                 if (foundComment.author.id.equals(req.user._id)) {
                     next();                   
                 }else{
-                    res.redirect("back");
+                    req.flash("error", "You are not authorized to do that!")
+                    res.redirect("/campgrounds");
                 }
             }
         });
     } else {
-        res.redirect("back");
+        req.flash("error", "You need to be logged in!")
+        res.redirect("/campgrounds");
     }    
 }
 
@@ -50,6 +54,7 @@ middlewareObj.isLoggedIn = function (req, res, next) {
     if(req.isAuthenticated()){
         return next();
     }    
+    req.flash("error", "You are not logged in, please login to continue!");
     res.redirect("/login");
 }
 

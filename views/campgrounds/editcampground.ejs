@@ -5,10 +5,10 @@
         <div class="col-10 col-md-6 pb-4 my-4 mx-auto border border-dark rounded-0">
             <h1>Edit <%=camps.name%></h1>
             <form action="/campgrounds/<%=camps._id%>?_method=PUT" method="POST">
-                <input class="form-control mb-3" type="text" name="campname" value="<%=camps.name%>">
-                <input class="form-control mb-3" type="text" name="campurl" value="<%=camps.image%>">
+                <input class="form-control mb-3" type="text" name="campname" value="<%=camps.name%>" maxlength="14">
+                <input class="form-control mb-3" type="text" name="campurl" value="<%=camps.image%>" >
                 <input class="form-control mb-3" type="text" name="campdesc" value="<%=camps.description%>">
-                <button class="btn btn-outline-dark btn-block rounded-0">Submit</button>
+                <button class="btn btn-outline-primary btn-block rounded-0">Submit</button>
             </form>
         </div>
     </div>

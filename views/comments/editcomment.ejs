@@ -6,7 +6,7 @@
             <h1>Edit comment</h1>
             <form action="/campgrounds/<%=CampgroundID%>/comments/<%=comment._id%>?_method=PUT" method="POST">
                 <input class="form-control mb-3" type="text" name="comment[text]" value="<%=comment.text%>">
-                <button class="btn btn-outline-dark btn-block rounded-0">Submit</button>
+                <button class="btn btn-outline-primary btn-block rounded-0">Submit</button>
             </form>
         </div>
     </div>

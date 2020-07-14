@@ -5,10 +5,10 @@
         <div class="col-10 col-md-6 pb-4 my-4 mx-auto border border-dark rounded-0">
             <h1>Add a new Campground</h1>
             <form action="/campgrounds" method="POST">
-                <input class="form-control mb-3" type="text" name="campname" placeholder="Name">
+                <input class="form-control mb-3" type="text" name="campname" placeholder="Name" maxlength="14">
                 <input class="form-control mb-3" type="text" name="campurl" placeholder="Image URL">
                 <input class="form-control mb-3" type="text" name="campdesc" placeholder="Description">
-                <button class="btn btn-outline-dark btn-block rounded-0">Submit</button>
+                <button class="btn btn-outline-primary btn-block rounded-0">Submit</button>
             </form>
         </div>
     </div>
