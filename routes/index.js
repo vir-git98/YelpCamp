@@ -1,7 +1,8 @@
 const express   =  require("express"),
       passport  = require("passport"),
       router    =  express.Router({mergeParams:true}),
-      User      = require("../models/user");
+      User      = require("../models/user"),
+      middleware= require("../middleware");
 
 //HOME
 router.get("/", function (req, res) {
@@ -47,13 +48,5 @@ router.get("/logout", function (req,res) {
    req.logout(); 
    res.redirect("/");
 });
-
-//MIDDLEWARE TO CHECK IF THE USER IS LOGGED IN OR NOT
-function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()){
-        return next();
-    }    
-    res.redirect("/login");
-}
 
 module.exports=router;
