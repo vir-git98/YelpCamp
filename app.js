@@ -29,6 +29,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //EJS CONFIGURATION
 app.set('view engine', 'ejs');
 
+//FOR STATIC FILES
+
+app.use(express.static(__dirname + "/public"));
+
 //method-override CONFIGURATION
 app.use(methodOverride("_method"));
 
