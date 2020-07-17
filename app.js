@@ -21,9 +21,14 @@ const indexRoutes       =   require("./routes/index"),
       campgroundRoutes  =   require("./routes/campground"),
       commentRoutes     =   require("./routes/comment");
 
-      seedDB();
-//MongoDB/Mongoose CONFIGURATION
-mongoose.connect('mongodb://localhost/yelpcamp', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify:false });
+      //seedDB();
+//MongoDB/Mongoose CONFIGURATION FOR LOCAL DB
+//mongoose.connect('mongodb://localhost/yelpcamp', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify:false });
+
+//MongoDB/Mongoose CONFIGURATION FOR DB using Enviroment variable(for local and cloud DB)
+mongoose.connect(process.env.DATABASEURL, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify:false });
+
+//BODYPARSER CONFIG
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //EJS CONFIGURATION
