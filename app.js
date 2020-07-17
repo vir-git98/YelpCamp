@@ -68,5 +68,9 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 app.use(indexRoutes);
 
-//APP CONNECTION TO THE SERVER
-app.listen(3000);
+//APP CONNECTION TO THE SERVER 3000 FOR LOCAL AND ENVIROMENT VARIABLE FOR HEROKU
+const port = process.env.PORT || 3000;
+app.listen(port, function () {  
+    console.log("Server Has Started!");
+  });
+  
